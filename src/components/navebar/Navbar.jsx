@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button"
+import { Menu, ShoppingCart, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [menu, setMenu] = useState("");
 
   return (
     <nav className="p-4 bg-white shadow-md">
@@ -38,14 +39,26 @@ export default function Navbar() {
             <NavigationMenuList className="flex space-x-6">
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link to="/" className="text-gray-700 hover:text-red-500">
+                  <Link
+                    to="/"
+                    onClick={() => setMenu("home")}
+                    className={`${
+                      menu === "home" ? "text-red-500" : "text-gray-700"
+                    } hover:text-red-500 font-mono text-lg`}
+                  >
                     Home
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
-                  <Link to="/menu" className="text-gray-700 hover:text-red-500">
+                  <Link
+                    to="/menu"
+                    onClick={() => setMenu("menu")}
+                    className={`${
+                      menu === "menu" ? "text-red-500" : "text-gray-700"
+                    } hover:text-red-500 font-mono text-lg`}
+                  >
                     Menu
                   </Link>
                 </NavigationMenuLink>
@@ -54,7 +67,10 @@ export default function Navbar() {
                 <NavigationMenuLink asChild>
                   <Link
                     to="/about"
-                    className="text-gray-700 hover:text-red-500"
+                    onClick={() => setMenu("about")}
+                    className={`${
+                      menu === "about" ? "text-red-500" : "text-gray-700"
+                    } hover:text-red-500 font-mono text-lg`}
                   >
                     About
                   </Link>
@@ -64,15 +80,24 @@ export default function Navbar() {
           </NavigationMenu>
         </div>
 
-        <div className="flex items-center" >
-        <Button variant="link">Login</Button>
+        <div className="flex items-center">
+          <Button className="hover:text-blue-500 " variant="link">
+            Login
+          </Button>
+        </div>
+
+        <div className="relative">
+          <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-gray-700 cursor-pointer" />
+
+          <div className="w-2 h-2 bg-red-500 rounded-full absolute -top-1 -right-1"></div>
         </div>
 
         <div className="flex items-center space-x-4 ">
           <Avatar className="ml-4 w-10 h-10 ">
             <AvatarImage
-            className="w-10 h-10 rounded-full"
-            src="https://github.com/shadcn.png" />
+              className="w-10 h-10 rounded-full"
+              src="https://github.com/shadcn.png"
+            />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
         </div>
