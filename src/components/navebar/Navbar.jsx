@@ -53,7 +53,7 @@ export default function Navbar() {
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
-                    to="/menu"
+                    to="#menu"
                     onClick={() => setMenu("menu")}
                     className={`${
                       menu === "menu" ? "text-red-500" : "text-gray-700"
@@ -130,7 +130,7 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            to="/menu"
+            to="#menu"
             className="text-gray-700 hover:text-red-500"
             onClick={() => setIsOpen(false)}
           >

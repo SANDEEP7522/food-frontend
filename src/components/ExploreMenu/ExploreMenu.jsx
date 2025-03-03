@@ -41,35 +41,36 @@ const menuItems = [
 
 function ExploreMenu({ categories, setCategories }) {
   return (
-    <div className=" bg-gray-100 p-6">
+    <div className=" bg-gray-100 p-6" id="menu" >
       <h2 className="text-3xl font-bold text-center text-red-500 mb-6">
         🍽️ Explore Our Menu
       </h2>
-      <div className="flex flex-wrap justify-center gap-6 p-6">
-        {menuItems.map((item) => (
-          <div
-            onClick={() =>
-              setCategories((prev) => (prev === item.name ? "All" : item.name))
-            }
-            key={item.id}
-            className="bg-white p-6 rounded-full shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-105 cursor-pointer"
-          >
-            <img
-              onClick={() =>
-                setCategories((prev) =>
-                  prev === item.name ? "All" : item.name
-                )
-              }
-              src={item.image}
-              alt={item.name}
-              className="w-14 h-14 object-cover rounded-full border-2 border-gray-300 hover:shadow-2xl transition-transform duration-300 transform hover:scale-105 "
-            />
-            <h3 className="text-lg font-semibold text-gray-800 mt-4 text-center">
-              {item.name}
-            </h3>
-          </div>
-        ))}
+      <div className="overflow-x-auto whitespace-nowrap p-6 scrollbar-thin scrollbar-thumb-gray-300">
+  <div className="inline-flex gap-6">
+    {menuItems.map((item) => (
+      <div
+        onClick={() =>
+          setCategories((prev) => (prev === item.name ? "All" : item.name))
+        }
+        key={item.id}
+        className="bg-white p-6 rounded-full shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-105 cursor-pointer"
+      >
+        <img
+          onClick={() =>
+            setCategories((prev) => (prev === item.name ? "All" : item.name))
+          }
+          src={item.image}
+          alt={item.name}
+          className="w-14 h-14 object-cover rounded-full border-2 border-gray-300 hover:shadow-2xl transition-transform duration-300 transform hover:scale-105 "
+        />
+        <h3 className="text-lg font-semibold text-gray-800 mt-4 text-center">
+          {item.name}
+        </h3>
       </div>
+    ))}
+  </div>
+</div>
+
     </div>
   );
 }

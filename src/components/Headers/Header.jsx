@@ -5,6 +5,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const images = [
   "https://cdn3.vox-cdn.com/uploads/chorus_asset/file/704658/tumblr_m6oolzvXsJ1qfvx4yo1_500.0.gif",
@@ -28,16 +29,16 @@ function Header() {
   return (
     <div className="w-full max-w4-xl mx-auto mt-6 relative">
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
-        <h4 className="text-2xl font-bold mb-2 text-red-800">
-          🍽️ Enjoy Fresh, Delicious, & Flavorful!
-        </h4>
-        <p className="text-clip font-medium leading-relaxed">
-          🍕 **Food made with the finest ingredients** to bring you a rich &
-          satisfying taste. 🌿 **Every dish is crafted to perfection**, ensuring
-          each bite is a burst of flavor. 😋 Experience the **joy of eating**
-          with our mouthwatering meals, prepared with ❤️ love & care just for
-          you!
-        </p>
+      <motion.h4
+  className="text-2xl font-bold mb-2 text-red-800"
+  initial={{ opacity: 0, x: -50 }} // Start position (hidden, moved left)
+  whileInView={{ opacity: 1, x: 0 }} // Animate to visible state
+  viewport={{ once: true }} // Ensures it animates only once
+  transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
+>
+  🍽️ Enjoy Fresh, Delicious, & Flavorful!
+</motion.h4>
+       
         <Button className="bg-slate-400 px-6 py-3 rounded-md shadow-lg hover:bg-slate-500 transition-all">
           View Menu
         </Button>
