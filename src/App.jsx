@@ -7,12 +7,20 @@ import About from "./pages/About/About";
 import Card from "./pages/Card/Card";
 import OrderPlace from "./pages/OrderPlace/OrderPlace";
 import Footer from "./components/Footers/Footer";
+import Login from "./components/Login/Login";
+import { useState } from "react";
 
 function App() {
+
+ const [showLogin, setShowLogin] = useState(false);
+
   return (
     <>
+    {
+      showLogin? <Login /> : <></>
+    }
       <div>
-        <Navbar />
+        <Navbar setShowLogin={setShowLogin} />
         <Routes>
           <Route path="/" element={<Home />} />
           {/* <Route path="/menu" element={<Menu />} /> */}

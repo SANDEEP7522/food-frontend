@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
-export default function Navbar() {
+export default function Navbar({ setShowLogin }) {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState("");
 
@@ -81,7 +81,9 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center">
-          <Button className="hover:text-blue-500 " variant="link">
+          <Button
+          onClick={() => setShowLogin(true)}
+          className="hover:text-blue-500 " variant="link">
             Login
           </Button>
         </div>
