@@ -5,7 +5,7 @@ const food_list = [
        name: "Classic Cheeseburger",
        price: 9,
        description: "A juicy beef patty with melted cheese, lettuce, tomato, and our special sauce.",
-       category: "Burgers"
+       categories: "Burgers"
      },
      {
        id: 2,
@@ -13,7 +13,7 @@ const food_list = [
        name: "Margherita Pizza",
        price: 2,
        description: "Classic Italian pizza with fresh tomatoes, mozzarella cheese, and basil.",
-       category: "Pizza"
+       categories: "Pizza"
      },
      {
        id: 3,
@@ -21,7 +21,7 @@ const food_list = [
        name: "Creamy Alfredo Pasta",
        price: 4,
        description: "Rich and creamy Alfredo sauce served over fettuccine pasta with parmesan cheese.",
-       category: "Pasta"
+       categories: "Pasta"
      },
      {
        id: 4,
@@ -29,7 +29,7 @@ const food_list = [
        name: "Sushi Platter",
        price: 7,
        description: "A variety of fresh sushi rolls served with soy sauce, wasabi, and ginger.",
-       category: "Sushi"
+       categories: "Sushi"
      },
      {
        id: 5,
@@ -37,7 +37,7 @@ const food_list = [
        name: "Caesar Salad",
        price: 12,
        description: "Crisp romaine lettuce, croutons, and parmesan cheese with a creamy Caesar dressing.",
-       category: "Salads"
+       categories: "Salads"
      },
      {
        id: 6,
@@ -45,7 +45,7 @@ const food_list = [
        name: "Grilled Steak",
        price: 5,
        description: "Tender and juicy grilled steak seasoned to perfection, served with garlic butter.",
-       category: "Steak"
+       categories: "Steak"
      },
      {
        id: 7,
@@ -53,7 +53,7 @@ const food_list = [
        name: "Chocolate Lava Cake",
        price: 19,
        description: "Warm and gooey chocolate cake with a molten center, served with vanilla ice cream.",
-       category: "Desserts"
+       categories: "Desserts"
      },
      {
        id: 8,
@@ -61,7 +61,7 @@ const food_list = [
        name: "Cappuccino",
        price: 9,
        description: "Rich espresso with steamed milk and a frothy top, dusted with cocoa powder.",
-       category: "Beverages"
+       categories: "Beverages"
      }
    ];
    

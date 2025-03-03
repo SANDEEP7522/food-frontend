@@ -16,17 +16,21 @@ function FoodDisplay({ categories }) {
       {/* Food Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {food_list.map((item, index) => {
-          return (
-            <FoodItem
-              key={index}
-              id={item.id}
-              image={item.image}
-              name={item.name}
-              price={item.price}
-              description={item.description}
-          //     category={item.category}
-            />
-          );
+          {console.log(categories, item.categories);
+          }
+          if (categories === "All" || categories === item.categories) {
+            return (
+              <FoodItem
+                key={index}
+                id={item.id}
+                image={item.image}
+                name={item.name}
+                price={item.price}
+                description={item.description}
+                categories={item.categories}
+              />
+            );
+          }
         })}
       </div>
     </div>
