@@ -18,9 +18,9 @@ function Footer() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="bg-gray-900 text-gray-300 pt-10"
     >
-      {/* Main Footer Grid */}
+      <div className="text-4xl font-bold text-center mb-6 hover:text-yellow-400">🍽 Food Delivery</div>
+
       <div className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-        {/* Categories */}
         <div>
           <h3 className="text-white font-semibold text-lg mb-3">Categories</h3>
           <ul className="space-y-2">
@@ -41,7 +41,11 @@ function Footer() {
             <li className="hover:text-white transition">🔄 Returns</li>
             <li className="hover:text-white transition">🚚 Shipping</li>
             <li className="hover:text-white transition">❓ FAQs</li>
-            <li className="flex hover:text-white transition">  <FaWhatsapp size={22} />📞 Help Center</li>
+            <li className="flex hover:text-white transition">
+              {" "}
+              <FaWhatsapp size={22} />
+              📞 Help Center
+            </li>
 
             <p>+ 91 9999999999</p>
           </ul>
