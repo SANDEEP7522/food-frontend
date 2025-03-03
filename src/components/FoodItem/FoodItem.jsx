@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
+import { StoreContext } from "../../context/StoreContext";
 
 function FoodItem({ id, image, name, price, description }) {
   const [rating, setRating] = useState(1);
-  const [itemCount, setItemCount] = useState(0);
+  const { cardItems, addToCard, removeFromCard } = useContext(StoreContext);
+  const itemCount = cardItems[id] || 0;
 
   const increaseCount = () => {
-    setItemCount((prevCount) => prevCount + 1);
+    addToCard(id);
   };
 
   const decreaseCount = () => {
     if (itemCount > 0) {
-      setItemCount((prevCount) => prevCount - 1);
+      removeFromCard(id);
     }
   };
 
@@ -35,12 +37,12 @@ function FoodItem({ id, image, name, price, description }) {
             }`}
             disabled={itemCount === 0}
           >
-            <AiOutlineMinus
-            size={10}
-            />
+            <AiOutlineMinus size={10} />
           </button>
-
-          <span className="text-sm font-semibold bg-gray-200 px-3 py-1 rounded-md shadow">
+          <span
+            size={10}
+            className="text-sm font-semibold bg-gray-200 px-3 py-1 rounded-md shadow"
+          >
             {itemCount}
           </span>
           <button
@@ -49,6 +51,8 @@ function FoodItem({ id, image, name, price, description }) {
           >
             <AiOutlinePlus size={10} />
           </button>
+
+          {/* } */}
         </div>
       </div>
 
@@ -83,3 +87,4 @@ function FoodItem({ id, image, name, price, description }) {
 }
 
 export default FoodItem;
+
