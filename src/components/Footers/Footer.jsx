@@ -43,7 +43,9 @@ function Footer() {
             <li className="hover:text-white transition">❓ FAQs</li>
             <li className="flex hover:text-white transition">
               {" "}
-              <FaWhatsapp size={22} />
+              <FaWhatsapp
+              className="mr-2 text-green-600"
+              size={22} />
               📞 Help Center
             </li>
 

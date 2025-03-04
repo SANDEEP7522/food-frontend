@@ -7,7 +7,7 @@ import About from "./pages/About/About";
 import Card from "./pages/Card/Card";
 import OrderPlace from "./pages/OrderPlace/OrderPlace";
 import Footer from "./components/Footers/Footer";
-import Login from "./components/Login/Login";
+import Login from "./components/LoginSignup/Login";
 import { useState } from "react";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
   return (
     <>
     {
-      showLogin? <Login /> : <></>
+      showLogin? <Login setShowLogin={setShowLogin} /> : <></>
     }
       <div>
         <Navbar setShowLogin={setShowLogin} />
