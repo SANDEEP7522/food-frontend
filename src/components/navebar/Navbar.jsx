@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Menu, ShoppingCart, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,10 +10,12 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { StoreContext } from "../../context/StoreContext";
 
 export default function Navbar({ setShowLogin }) {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState("");
+  const { getTotalAllAmount } = useContext(StoreContext);
 
   return (
     <nav className="p-4 bg-white shadow-md">
@@ -94,8 +96,8 @@ export default function Navbar({ setShowLogin }) {
           <Link to="/card">
             <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-gray-700 cursor-pointer" />
           </Link>
-          <div className="w-2 h-2 bg-red-500 rounded-full absolute -top-1 -right-1"></div>
-        </div>
+          <div className={getTotalAllAmount() === 0 ? " " : "w-2 h-2 bg-red-500 rounded-full absolute -top-1 -right-1"}></div>
+          </div>
 
         <div className="flex items-center space-x-4 ">
           <Avatar className="ml-4 w-10 h-10 ">

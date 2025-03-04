@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 function Card() {
-  const { cardItems, food_list, removeFromCard } = useContext(StoreContext);
+  const { cardItems, food_list, removeFromCard, getTotalAllAmount } = useContext(StoreContext);
 
   return (
     <div className="flex flex-col items-center p-4 min-h-screen bg-gray-300">
@@ -82,7 +82,7 @@ function Card() {
           <div className="space-y-3">
             <div className="flex justify-between text-gray-700 text-lg">
               <p>Subtotal:</p>
-              <p>${0}</p>
+              <p>${getTotalAllAmount()}</p>
             </div>
             <div className="flex justify-between text-gray-700 text-lg">
               <p>🚚 Delivery Fee:</p>
@@ -90,7 +90,7 @@ function Card() {
             </div>
             <div className="flex justify-between text-gray-900 text-xl font-semibold border-t pt-2">
               <p>💰 Total:</p>
-              <p>${0}</p>
+              <p>${getTotalAllAmount() + 2}</p>
             </div>
           </div>
           <Button className="w-full mt-4 text-lg py-2">🛍️ Checkout</Button>
