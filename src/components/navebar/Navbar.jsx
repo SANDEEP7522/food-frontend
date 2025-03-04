@@ -37,7 +37,7 @@ export default function Navbar({ setShowLogin }) {
         <div className="hidden md:flex">
           <NavigationMenu>
             <NavigationMenuList className="flex space-x-6">
-              <NavigationMenuItem>
+              {/* <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
                     to="/"
@@ -49,7 +49,7 @@ export default function Navbar({ setShowLogin }) {
                     Home
                   </Link>
                 </NavigationMenuLink>
-              </NavigationMenuItem>
+              </NavigationMenuItem> */}
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
@@ -82,15 +82,18 @@ export default function Navbar({ setShowLogin }) {
 
         <div className="flex items-center">
           <Button
-          onClick={() => setShowLogin(true)}
-          className="hover:text-blue-500 " variant="link">
+            onClick={() => setShowLogin(true)}
+            className="hover:text-blue-500 "
+            variant="link"
+          >
             Login
           </Button>
         </div>
 
         <div className="relative">
-          <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-gray-700 cursor-pointer" />
-
+          <Link to="/card">
+            <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-gray-700 cursor-pointer" />
+          </Link>
           <div className="w-2 h-2 bg-red-500 rounded-full absolute -top-1 -right-1"></div>
         </div>
 
