@@ -4,9 +4,12 @@ import { motion } from "framer-motion";
 import { Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useNavigate } from "react-router-dom";
 
 function Card() {
   const { cardItems, food_list, removeFromCard, getTotalAllAmount } = useContext(StoreContext);
+
+ const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center p-4 min-h-screen bg-gray-300">
@@ -86,14 +89,16 @@ function Card() {
             </div>
             <div className="flex justify-between text-gray-700 text-lg">
               <p>🚚 Delivery Fee:</p>
-              <p>${2}</p>
+              <p>${getTotalAllAmount() === 0 ? 0 : 2}</p>
             </div>
             <div className="flex justify-between text-gray-900 text-xl font-semibold border-t pt-2">
               <p>💰 Total:</p>
-              <p>${getTotalAllAmount() + 2}</p>
+              <p>${getTotalAllAmount() === 0 ? 0 : getTotalAllAmount() + 2}</p>
             </div>
           </div>
-          <Button className="w-full mt-4 text-lg py-2">🛍️ Checkout</Button>
+          <Button className="w-full mt-4 text-lg py-2"
+          onClick={() => navigate("/order")}
+          >🛍️ Checkout</Button>
         </motion.div>
 
        

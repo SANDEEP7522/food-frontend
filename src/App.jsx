@@ -26,7 +26,7 @@ function App() {
           {/* <Route path="/menu" element={<Menu />} /> */}
           <Route path="/about" element={<About />} />
           <Route path="/card" element={<Card />} />
-          <Route path="/orderPlce" element={<OrderPlace />} />
+          <Route path="/order" element={<OrderPlace />} />
         </Routes>
       </div>
       <Footer />
