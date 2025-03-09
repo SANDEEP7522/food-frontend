@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,21 @@ import { X } from "lucide-react"; // Importing the cross icon from Lucide
 
 function Login({ setShowLogin }) {
   const [currState, setCurrState] = useState("Sign Up");
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setData({ ...data, [name]: value });
+  };
+
+  useEffect(() =>{
+    console.log('data', data);
+    
+  }, [data]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -30,10 +45,33 @@ function Login({ setShowLogin }) {
 
           <div className="space-y-4">
             {currState === "Sign Up" && (
-              <Input type="text" placeholder="👤 Enter Username" required />
+              <Input
+                name="username"
+                value={data.username}
+                onChange={onChangeHandler}
+                type="text"
+                placeholder="👤 Enter Username"
+                required
+              />
             )}
-            <Input type="email" placeholder="📧 Enter Email" required />
-            <Input type="password" placeholder="🔒 Enter Password" required />
+
+            <Input
+              name="email"
+              value={data.email}
+              onChange={onChangeHandler}
+              type="email"
+              placeholder="📧 Enter Email"
+              required
+            />
+
+            <Input
+              name="password"
+              value={data.password}
+              onChange={onChangeHandler}
+              type="password"
+              placeholder="🔒 Enter Password"
+              required
+            />
           </div>
 
           <div className="flex items-center mt-4 text-sm">
