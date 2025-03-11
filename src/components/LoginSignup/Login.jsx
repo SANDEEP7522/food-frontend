@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react"; // Importing the cross icon from Lucide
+import { StoreContext } from "../../context/StoreContext";
+import axios from "axios";
 
 function Login({ setShowLogin }) {
-  const [currState, setCurrState] = useState("Sign Up");
+  const { BASE_URL, token, setToken } = useContext(StoreContext);
+  const [currState, setCurrState] = useState("Sign In"); // Default state set to "Sign In"
   const [data, setData] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
   });
@@ -17,10 +20,47 @@ function Login({ setShowLogin }) {
     setData({ ...data, [name]: value });
   };
 
-  useEffect(() =>{
-    console.log('data', data);
-    
-  }, [data]);
+  const onlogin = async (event) => {
+    event.preventDefault();
+    let newUrl = BASE_URL;
+
+    if (currState === "Sign Up") {
+      newUrl += "/api/user/register"; // Corrected API endpoint
+    } else {
+      newUrl += "/api/user/login"; // Corrected API endpoint
+    }
+
+    console.log("Final API URL:", newUrl);
+    console.log("Sending Data:", data);
+
+    try {
+      const response = await axios.post(newUrl, data);
+      console.log("API Response:", response.data);
+
+      if (response.data.success) {
+        const newToken = response.data?.data?.token;
+        console.log("Token from API:", newToken);
+
+        if (newToken) {
+          localStorage.setItem("token", newToken);
+          console.log(
+            "Token stored in localStorage:",
+            localStorage.getItem("token")
+          );
+        } else {
+          console.error("Token is missing in API response");
+        }
+
+        setToken(newToken);
+        setShowLogin(false);
+      } else {
+        alert(response.data.message || "Something went wrong");
+      }
+    } catch (error) {
+      console.error("Error:", error.response?.data?.message || error.message);
+      alert(error.response?.data?.message || "Invalid request");
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -30,7 +70,7 @@ function Login({ setShowLogin }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        <form action="">
+        <form action="" onSubmit={onlogin}>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold">
               {currState} {currState === "Sign Up" ? "🚀" : "🔑"}
@@ -46,8 +86,8 @@ function Login({ setShowLogin }) {
           <div className="space-y-4">
             {currState === "Sign Up" && (
               <Input
-                name="username"
-                value={data.username}
+                name="name"
+                value={data.name}
                 onChange={onChangeHandler}
                 type="text"
                 placeholder="👤 Enter Username"
@@ -85,7 +125,7 @@ function Login({ setShowLogin }) {
             </p>
           </div>
 
-          <Button className="w-full mt-4">
+          <Button type="submit" className="w-full mt-4">
             {currState === "Sign Up" ? "🎉 Create Account" : "🚀 Sign In"}
           </Button>
 

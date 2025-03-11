@@ -16,8 +16,8 @@ function FoodDisplay({ categories }) {
       {/* Food Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {food_list.map((item, index) => {
-          {console.log(categories, item.categories);
-          }
+          // {console.log(categories, item.categories);
+          // }
           if (categories === "All" || categories === item.categories) {
             return (
               <FoodItem

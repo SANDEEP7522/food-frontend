@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { Menu, ShoppingCart, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,11 +11,22 @@ import {
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { StoreContext } from "../../context/StoreContext";
+import { FaShoppingCart } from "react-icons/fa";
+import { AiOutlineLogout } from "react-icons/ai";
 
 export default function Navbar({ setShowLogin }) {
   const [isOpen, setIsOpen] = useState(false);
   const [menu, setMenu] = useState("");
-  const { getTotalAllAmount } = useContext(StoreContext);
+  const { getTotalAllAmount, token, setToken } = useContext(StoreContext);
+  const navigation = useNavigate();
+
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  setToken("");
+  navigation("/");
+};
+
+
 
   return (
     <nav className="p-4 bg-white shadow-md">
@@ -39,19 +50,6 @@ export default function Navbar({ setShowLogin }) {
         <div className="hidden md:flex">
           <NavigationMenu>
             <NavigationMenuList className="flex space-x-6">
-              {/* <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link
-                    to="/"
-                    onClick={() => setMenu("home")}
-                    className={`${
-                      menu === "home" ? "text-red-500" : "text-gray-700"
-                    } hover:text-red-500 font-mono text-lg`}
-                  >
-                    Home
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem> */}
               <NavigationMenuItem>
                 <NavigationMenuLink asChild>
                   <Link
@@ -82,32 +80,54 @@ export default function Navbar({ setShowLogin }) {
           </NavigationMenu>
         </div>
 
-        <div className="flex items-center">
-          <Button
-            onClick={() => setShowLogin(true)}
-            className="hover:text-blue-500 "
-            variant="link"
-          >
-            Login
-          </Button>
-        </div>
-
         <div className="relative">
           <Link to="/card">
             <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-gray-700 cursor-pointer" />
           </Link>
-          <div className={getTotalAllAmount() === 0 ? " " : "w-2 h-2 bg-red-500 rounded-full absolute -top-1 -right-1"}></div>
-          </div>
-
-        <div className="flex items-center space-x-4 ">
-          <Avatar className="ml-4 w-10 h-10 ">
-            <AvatarImage
-              className="w-10 h-10 rounded-full"
-              src="https://github.com/shadcn.png"
-            />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
+          <div
+            className={
+              getTotalAllAmount() === 0
+                ? " "
+                : "w-2 h-2 bg-red-500 rounded-full absolute -top-1 -right-1"
+            }
+          ></div>
         </div>
+
+        {!token ? (
+          <div className="flex items-center">
+            <Button
+              onClick={() => setShowLogin(true)}
+              className="hover:text-blue-500 "
+              variant="link"
+            >
+              Login
+            </Button>
+          </div>
+        ) : (
+          <div className="flex items-center space-x-4 group relative cursor-pointer">
+            <Avatar className="ml-4 w-10 h-10">
+              <AvatarImage
+                className="w-10 h-10 rounded-full"
+                src="https://github.com/shadcn.png"
+              />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+
+            <ul className="flex  items-center cursor-pointer relative group h-10 w-0">
+              <li className=" mt-8 order-button hidden absolute top-2  right-2 group-hover:block">
+                <FaShoppingCart size={14} />
+                <span className=" text-xs hover:text-blue-600 ">Order</span>
+              </li>
+
+              <li 
+              onClick={handleLogout}
+              className="hidden absolute mt-8 top-2 right-14 group-hover:block">
+                <AiOutlineLogout size={14} />
+                <span className=" text-xs hover:text-blue-600 ">logOut</span>
+              </li>
+            </ul>
+          </div>
+        )}
 
         {/* Mobile Menu Button */}
         <button
