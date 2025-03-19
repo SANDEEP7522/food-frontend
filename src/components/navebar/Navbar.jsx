@@ -8,6 +8,14 @@ import {
   NavigationMenuList,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { StoreContext } from "../../context/StoreContext";
@@ -20,13 +28,11 @@ export default function Navbar({ setShowLogin }) {
   const { getTotalAllAmount, token, setToken } = useContext(StoreContext);
   const navigation = useNavigate();
 
-const handleLogout = () => {
-  localStorage.removeItem("token");
-  setToken("");
-  navigation("/");
-};
-
-
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigation("/");
+  };
 
   return (
     <nav className="p-4 bg-white shadow-md">
@@ -80,7 +86,7 @@ const handleLogout = () => {
           </NavigationMenu>
         </div>
 
-        <div className="relative">
+        <div className="relative flex ml-3 mr-4 ">
           <Link to="/card">
             <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-gray-700 cursor-pointer" />
           </Link>
@@ -104,29 +110,39 @@ const handleLogout = () => {
             </Button>
           </div>
         ) : (
-          <div className="flex items-center space-x-4 group relative cursor-pointer">
-            <Avatar className="ml-4 w-10 h-10">
-              <AvatarImage
-                className="w-10 h-10 rounded-full"
-                src="https://github.com/shadcn.png"
-              />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+          <div className="relative">
+      <Select>
+        {/* Avatar acts as a trigger */}
+        <SelectTrigger className="flex items-center p-2 border rounded-lg cursor-pointer hover:bg-gray-100 transition focus:ring-2 focus:ring-red-400 focus:outline-none w-full md:w-auto">
+          <Avatar className="w-10 h-10">
+            <AvatarImage
+              className="w-10 h-10 rounded-full"
+              src="https://github.com/shadcn.png"
+            />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </SelectTrigger>
 
-            <ul className="flex  items-center cursor-pointer relative group h-10 w-0">
-              <li className=" mt-8 order-button hidden absolute top-2  right-2 group-hover:block">
-                <FaShoppingCart size={14} />
-                <span className=" text-xs hover:text-blue-600 ">Order</span>
-              </li>
-
-              <li 
-              onClick={handleLogout}
-              className="hidden absolute mt-8 top-2 right-14 group-hover:block">
-                <AiOutlineLogout size={14} />
-                <span className=" text-xs hover:text-blue-600 ">logOut</span>
-              </li>
-            </ul>
-          </div>
+        {/* Dropdown Menu */}
+        <SelectContent className="w-40 shadow-md border rounded-md bg-white">
+          <SelectItem 
+            value="order" 
+            className="flex items-center  space-x-2 p-2 hover:bg-gray-100 transition"
+          >
+            <FaShoppingCart size={25} className="text-gray-700" />
+            <span className="text-gray-700 flex">Order</span>
+          </SelectItem>
+          <SelectItem 
+            value="logout" 
+            className="flex items-center space-x-2 p-2 hover:bg-gray-100 transition" 
+            onClick={handleLogout}
+          >
+            <AiOutlineLogout size={25} className="text-gray-700" />
+            <span>Logout</span>
+          </SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
         )}
 
         {/* Mobile Menu Button */}

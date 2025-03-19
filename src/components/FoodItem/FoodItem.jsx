@@ -4,11 +4,14 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { StoreContext } from "../../context/StoreContext";
 
 function FoodItem({ id, image, name, price, description }) {
- //    console.log(id, image, name, price, description); 
+    // console.log('1111111',id, image, name, price, description); 
      
   const [rating, setRating] = useState(1);
   const { cardItems, addToCard, removeFromCard } = useContext(StoreContext);
   const itemCount = cardItems[id] || 0;
+
+  // console.log('itemCount', itemCount);
+  
 
   const increaseCount = () => {
      console.log('clicked', id);

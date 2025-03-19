@@ -52,7 +52,7 @@ function ExploreMenu({ categories, setCategories }) {
         onClick={() =>
           setCategories((prev) => (prev === item.name ? "All" : item.name))
         }
-        key={item.id}
+        key={item._id}
         className="bg-white p-6 rounded-full shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-105 cursor-pointer"
       >
         <img

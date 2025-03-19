@@ -3,6 +3,8 @@ import { StoreContext } from "../../context/StoreContext";
 import FoodItem from "../FoodItem/FoodItem";
 
 function FoodDisplay({ categories }) {
+  // console.log("Categories:", categories);
+  
   const { food_list } = useContext(StoreContext);
 
   // Function to decrease quantity
@@ -16,13 +18,13 @@ function FoodDisplay({ categories }) {
       {/* Food Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {food_list.map((item, index) => {
-          // {console.log(categories, item.categories);
-          // }
+          {console.log(categories, item.category);
+          }
           if (categories === "All" || categories === item.categories) {
             return (
               <FoodItem
                 key={index}
-                id={item.id}
+                id={item._id}
                 image={item.image}
                 name={item.name}
                 price={item.price}

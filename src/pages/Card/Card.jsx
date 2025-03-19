@@ -7,9 +7,11 @@ import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
 
 function Card() {
-  const { cardItems, food_list, removeFromCard, getTotalAllAmount } = useContext(StoreContext);
+  const { cardItems, food_list, removeFromCard, getTotalAllAmount } =
+    useContext(StoreContext);
+  console.log("..............", food_list, cardItems, getTotalAllAmount(), );
 
- const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center p-4 min-h-screen bg-gray-300">
@@ -29,11 +31,13 @@ function Card() {
         </div>
 
         {food_list.map((item) => {
-          const quantity = cardItems[item.id] || 0;
+          const quantity = cardItems[item._id] || 0;
+          console.log("Quantity0000:", quantity);
+
           if (quantity > 0) {
             return (
               <motion.div
-                key={item.id}
+                key={item._id}
                 className="grid grid-cols-2 md:grid-cols-6 items-center p-3 border-b text-gray-800 gap-4"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -56,7 +60,7 @@ function Card() {
                 </p>
 
                 <motion.button
-                  onClick={() => removeFromCard(item.id)}
+                  onClick={() => removeFromCard(item._id)}
                   className="p-2 text-red-500 hover:text-red-700 transition duration-200"
                   whileHover={{ scale: 1.2, rotate: 10 }}
                   whileTap={{ scale: 0.8, opacity: 0.5 }}
@@ -96,12 +100,14 @@ function Card() {
               <p>${getTotalAllAmount() === 0 ? 0 : getTotalAllAmount() + 2}</p>
             </div>
           </div>
-          <Button className="w-full mt-4 text-lg py-2"
-          onClick={() => navigate("/order")}
-          >🛍️ Checkout</Button>
+          <Button
+            className="w-full mt-4 text-lg py-2"
+            onClick={() => navigate("/order")}
+          >
+            🛍️ Checkout
+          </Button>
         </motion.div>
 
-       
         <motion.div
           className="flex-1 p-4"
           initial={{ opacity: 0, scale: 0.9 }}
