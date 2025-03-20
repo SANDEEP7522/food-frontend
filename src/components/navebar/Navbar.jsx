@@ -8,14 +8,6 @@ import {
   NavigationMenuList,
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { StoreContext } from "../../context/StoreContext";
@@ -24,6 +16,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 
 export default function Navbar({ setShowLogin }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpens, setIsOpens] = useState(false);
   const [menu, setMenu] = useState("");
   const { getTotalAllAmount, token, setToken } = useContext(StoreContext);
   const navigation = useNavigate();
@@ -111,38 +104,37 @@ export default function Navbar({ setShowLogin }) {
           </div>
         ) : (
           <div className="relative">
-      <Select>
-        {/* Avatar acts as a trigger */}
-        <SelectTrigger className="flex items-center p-2 border rounded-lg cursor-pointer hover:bg-gray-100 transition focus:ring-2 focus:ring-red-400 focus:outline-none w-full md:w-auto">
-          <Avatar className="w-10 h-10">
-            <AvatarImage
-              className="w-10 h-10 rounded-full"
-              src="https://github.com/shadcn.png"
-            />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-        </SelectTrigger>
+            {/* Avatar acts as a dropdown trigger */}
+            <div
+              onClick={() => setIsOpens(!isOpens)}
+              className="flex items-center space-x-4 cursor-pointer p-2 border rounded-lg hover:bg-gray-100 transition w-fit"
+            >
+              <Avatar className="w-10 h-10">
+                <AvatarImage
+                  className="w-10 h-10 rounded-full"
+                  src="https://github.com/shadcn.png"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </div>
 
-        {/* Dropdown Menu */}
-        <SelectContent className="w-40 shadow-md border rounded-md bg-white">
-          <SelectItem 
-            value="order" 
-            className="flex items-center  space-x-2 p-2 hover:bg-gray-100 transition"
-          >
-            <FaShoppingCart size={25} className="text-gray-700" />
-            <span className="text-gray-700 flex">Order</span>
-          </SelectItem>
-          <SelectItem 
-            value="logout" 
-            className="flex items-center space-x-2 p-2 hover:bg-gray-100 transition" 
-            onClick={handleLogout}
-          >
-            <AiOutlineLogout size={25} className="text-gray-700" />
-            <span>Logout</span>
-          </SelectItem>
-        </SelectContent>
-      </Select>
-    </div>
+            {/* Dropdown Menu */}
+            {isOpens && (
+              <ul className="absolute mt-2 right-0 w-40 bg-white shadow-lg border rounded-md p-2 z-50">
+                <li className="flex items-center space-x-3 p-2 hover:bg-gray-100 transition cursor-pointer">
+                  <FaShoppingCart size={20} className="text-gray-700" />
+                  <span className="text-gray-700">Order</span>
+                </li>
+                <li
+                  onClick={handleLogout}
+                  className="flex items-center space-x-3 p-2 hover:bg-gray-100 transition cursor-pointer"
+                >
+                  <AiOutlineLogout size={20} className="text-gray-700" />
+                  <span>Logout</span>
+                </li>
+              </ul>
+            )}
+          </div>
         )}
 
         {/* Mobile Menu Button */}

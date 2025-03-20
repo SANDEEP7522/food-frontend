@@ -8,26 +8,40 @@ const StoreContextProvider = (props) => {
   const [food_list, setFoodList] = useState([]);
   const BASE_URL = "http://localhost:4000";
   const [token, setToken] = useState("");
-
-  const addToCard = (itemId) => {
-    setCardItems((prev) => {
-      console.log("Previous Items:", prev);
-      const updatedItems = { ...prev, [itemId]: (prev[itemId] || 0) + 1 };
-      console.log("Updated Items:", updatedItems);
-      return updatedItems;
-    });
+  const addToCard = async (itemId) => {
+    setCardItems((prev) => ({
+      ...prev,
+      [itemId]: prev[itemId] ? prev[itemId] + 1 : 1,
+    }));
+    if (token) {
+      await axios.post(
+        BASE_URL + "/api/cart/add",
+        { itemId },
+        {
+          headers: {
+            token,
+          },
+        }
+      );
+    }
   };
 
-  const removeFromCard = (itemId) => {
-    setCardItems((prev) => {
-      const newItems = { ...prev };
-      if (newItems[itemId] > 1) {
-        newItems[itemId] -= 1;
-      } else {
-        delete newItems[itemId];
-      }
-      return newItems;
-    });
+  const removeFromCard = async (itemId) => {
+    setCardItems((prev) => ({
+      ...prev,
+      [itemId]: prev[itemId] - 1,
+    }));
+    if (token) {
+      await axios.post(
+        BASE_URL + "/api/cart/remove",
+        { itemId },
+        {
+          headers: {
+            token,
+          },
+        }
+      );
+    } 
   };
 
   const getTotalAllAmount = () => {
@@ -89,12 +103,34 @@ const StoreContextProvider = (props) => {
     }
   };
 
+// const loadCardData = async (token) => {
+//   if (token) {
+//     try {
+//       const response = await axios.post(
+//         BASE_URL + "/api/cart/get",
+//         {},
+//         {
+//           headers: {
+//             token,
+//           },
+//         }
+//       );
+//       console.log("response..............", response);
+//       setCardItems(response.data.cartData);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// };
+
+
   useEffect(() => {
     async function loadData() {
       await fetchFoodList();
       const storedToken = localStorage.getItem("token");
       if (storedToken) {
         setToken(storedToken);
+        // await loadCardData(localStorage.getItem("token"));
       }
     }
     loadData();
