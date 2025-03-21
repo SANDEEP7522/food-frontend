@@ -9,6 +9,7 @@ import OrderPlace from "./pages/OrderPlace/OrderPlace";
 import Footer from "./components/Footers/Footer";
 import Login from "./components/LoginSignup/Login";
 import { useState } from "react";
+import Verify from "./pages/verify/verify";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/card" element={<Card />} />
           <Route path="/order" element={<OrderPlace />} />
+          <Route path="/verify" element={<Verify />} />
         </Routes>
       </div>
       <Footer />
