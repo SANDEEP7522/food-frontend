@@ -10,7 +10,8 @@ import Footer from "./components/Footers/Footer";
 import Login from "./components/LoginSignup/Login";
 import { useState } from "react";
 import Verify from "./pages/verify/verify";
-import MyOrder from "./pages/MyOrder/MyOrder";
+import MyOrder from "./pages/MyOrder/MyOrder";  // Ensure correct capitalization
+
 
 // vs Code mr rha tha 
 function App() {
