@@ -122,7 +122,7 @@ export default function Navbar({ setShowLogin }) {
             {isOpens && (
               <ul className="absolute mt-2 right-0 w-40 bg-white shadow-lg border rounded-md p-2 z-50">
                 <li 
-                onClick={() => navigation("/myorders")}
+                onClick={() => navigation("/myOrders")}
                 className="flex items-center space-x-3 p-2 hover:bg-gray-100 transition cursor-pointer">
                   <FaShoppingCart size={20} className="text-gray-700" />
                   <span className="text-gray-700">Order</span>

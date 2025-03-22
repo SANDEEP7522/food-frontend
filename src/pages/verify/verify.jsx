@@ -29,7 +29,7 @@ const Verify = () => {
       console.log("response handleVerify", response);
 
       if (response.data.success) {
-        navigate("/myorders");
+        navigate("/myOrders");
       } else {
         navigate("/");
       }
