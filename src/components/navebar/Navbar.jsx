@@ -32,7 +32,7 @@ export default function Navbar({ setShowLogin }) {
       <div className="flex items-center justify-between max-w-6xl mx-auto">
         {/* Logo Section */}
         <div className="text-2xl font-bold text-red-500">
-          🍔 <Link to="/">Food Delivery</Link>
+          <Link to="/">E-commerce</Link>
         </div>
 
         {/* serch icon */}
@@ -121,7 +121,9 @@ export default function Navbar({ setShowLogin }) {
             {/* Dropdown Menu */}
             {isOpens && (
               <ul className="absolute mt-2 right-0 w-40 bg-white shadow-lg border rounded-md p-2 z-50">
-                <li className="flex items-center space-x-3 p-2 hover:bg-gray-100 transition cursor-pointer">
+                <li 
+                onClick={() => navigation("/myorders")}
+                className="flex items-center space-x-3 p-2 hover:bg-gray-100 transition cursor-pointer">
                   <FaShoppingCart size={20} className="text-gray-700" />
                   <span className="text-gray-700">Order</span>
                 </li>

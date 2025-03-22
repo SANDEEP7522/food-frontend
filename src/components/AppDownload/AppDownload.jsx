@@ -10,7 +10,7 @@ function AppDownload() {
       transition={{ duration: 0.5 }}
       className="bg-red-500 text-white text-center py-16 px-6"
     >
-      <h2 className="text-3xl font-bold mb-4">Get the Food Delivery App</h2>
+      <h2 className="text-3xl font-bold mb-4">Get the E-commerce App</h2>
       <p className="text-lg max-w-xl mx-auto mb-6">
         Discover the best food & drinks around you. Download the app now!
       </p>

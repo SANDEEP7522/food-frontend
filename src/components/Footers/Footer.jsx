@@ -18,7 +18,7 @@ function Footer() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="bg-gray-900 text-gray-300 pt-10"
     >
-      <div className="text-4xl font-bold text-center mb-6 hover:text-yellow-400">🍽 Food Delivery</div>
+      <div className="text-4xl font-bold text-center mb-6 hover:text-yellow-400">E-commerce</div>
 
       <div className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         <div>

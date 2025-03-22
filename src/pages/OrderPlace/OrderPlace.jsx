@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/button";
 import React, { useContext, useState } from "react";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function OrderPlace() {
   const { getTotalAllAmount, token, food_list, cardItems, BASE_URL } =
     useContext(StoreContext);
+
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
     firstName: "",
@@ -41,23 +44,32 @@ function OrderPlace() {
       items: ordrItems,
       amount: getTotalAllAmount() + 2,
       address: data,
-    }
-    let response = await axios.post(BASE_URL+ "/api/order/place", orderData,  {
-    headers: { token }});
+    };
+    let response = await axios.post(BASE_URL + "/api/order/place", orderData, {
+      headers: {
+        Authorization: `Bearer ${token}`, // ✅ Ensure correct format
+        "Content-Type": "application/json",
+      },
+    });
     console.log("response Order Place", response);
-    
+
     if (response.data.success) {
-     const {session_url} = response.data;
-     window.location.replace(session_url);
-    }else{
+      const { session_url } = response.data;
+      window.location.replace(session_url);
+    } else {
       alert("Error Placing Order");
     }
   };
 
-  // useEffect(() => {
-  //   console.log('data', data);
-
-  // }, [data]);
+  useEffect(() => {
+    if (token) {
+      navigate("/cart");
+    } else if (!token) {
+      navigate("/login");
+    }else{
+      navigate("/");
+    }
+  }, [token]);
 
   return (
     <motion.form
