@@ -61,15 +61,13 @@ function OrderPlace() {
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      navigate("/cart");
-    } else if (!token) {
-      navigate("/login");
-    }else{
-      navigate("/");
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (token) {
+  //     navigate("/cart");
+  //   } else if (!token) {
+  //     navigate("/cart");
+  //   }
+  // }, [token]);
 
   return (
     <motion.form

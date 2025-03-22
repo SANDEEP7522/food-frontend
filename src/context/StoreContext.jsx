@@ -6,7 +6,8 @@ export const StoreContext = createContext(null);
 const StoreContextProvider = (props) => {
   const [cardItems, setCardItems] = useState({});
   const [food_list, setFoodList] = useState([]);
-  const BASE_URL = "http://localhost:4000";
+  // const BASE_URL = "http://localhost:4000";
+  const BASE_URL = "https://food-backend-1-9h96.onrender.com";
   const [token, setToken] = useState("");
   const addToCard = async (itemId) => {
     setCardItems((prev) => ({
