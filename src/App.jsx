@@ -10,7 +10,7 @@ import Footer from "./components/Footers/Footer";
 import Login from "./components/LoginSignup/Login";
 import { useState } from "react";
 import Verify from "./pages/verify/verify";
-import MyOrder from "./pages/Myorder/MyOrder";
+import MyOrder from "./pages/MyOrder/MyOrder";
 
 function App() {
 
